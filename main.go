@@ -3,13 +3,24 @@ package main
 import (
 	"fmt"
 	"oms/routes"
+	"oms/constants" //project level constants
+	"oms/database"
 	"github.com/omniful/go_commons/http"
+	"oms/utils"
+
 )
 
 func main(){
-	
 	// Initialize the server
-	server := http.InitializeServer(":8080", 0, 0, 0)
+	server := http.InitializeServer(constants.PORT, constants.ReadTimeout, constants.WriteTimeout, constants.IdleTimeout)
+	
+	database.Connect()
+
+	redisClient := utils.ConnectToRedis()
+	if redisClient == nil {
+		fmt.Println("❌ Redis connection failed. Exiting...")
+		return
+	}
 
 	//checking the error
 	if server == nil {

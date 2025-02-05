@@ -1,3 +1,5 @@
+// this package contain the routes for creating and fetching the orders details
+
 package routes
 
 import (
