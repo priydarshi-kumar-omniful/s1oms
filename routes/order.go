@@ -1,10 +1,14 @@
 package routes
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/omniful/go_commons/http"
+	_"github.com/gin-gonic/gin"
 	"oms/controllers"
 )
 
-func IncomingRoutes(r *gin.Engine){
+func IncomingRoutes(r *http.Server){
 	r.POST("/createorder",controllers.BulkOrder)
+	r.GET("/vieweorder",controllers.ViewOrder)
 }
+
+

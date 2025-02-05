@@ -1,10 +1,9 @@
 package main
 
-import(
+import (
 	"fmt"
+	"oms/routes"
 	"github.com/omniful/go_commons/http"
-	"github.com/gin-gonic/gin"
-	"time"
 )
 
 func main(){
@@ -18,9 +17,7 @@ func main(){
 		return
 	}
 	
-	server.GET("/",func(ctx *gin.Context){
-		ctx.JSON(int(http.StatusOK),gin.H{"MESSAGE":"ACCEPTED REQUES"})
-	})
+	routes.IncomingRoutes(server)
 
 	// Start the server
 	err := server.StartServer("oms")

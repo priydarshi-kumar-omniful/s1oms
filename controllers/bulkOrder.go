@@ -7,3 +7,4 @@ import (
 func BulkOrder(ctx *gin.Context){
 	ctx.JSON(http.StatusAccepted,gin.H{"MESSAGE":"ORDER CREATED"})
 }
+
