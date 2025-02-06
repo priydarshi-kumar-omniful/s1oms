@@ -1,0 +1,6 @@
+tenant_id,customer_id,product_id,name,quantity,warehouse_id,price,sku_id
+tenant_1,customer_1,prod_001,Product A,10,wh_001,15.99,sku_001
+tenant_1,customer_1,prod_002,Product B,5,wh_001,22.50,sku_002
+tenant_2,customer_2,prod_003,Product C,7,wh_002,13.75,sku_003
+tenant_2,customer_2,prod_004,Product D,3,wh_002,30.00,sku_004
+tenant_3,customer_3,prod_005,Product E,2,wh_003,50.00,sku_005

@@ -5,7 +5,11 @@ import (
 	"fmt"
 	"log"
 	"time"
+
+	
 	"oms/constants"
+
+
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -42,6 +46,6 @@ func GetCollection(collectionName string) *mongo.Collection {
 	defer cancel()
 	fmt.Println("get collection called")
 	// Return the MongoDB collection with the context
-	return Client.Database("orders").Collection(collectionName)
+	return Client.Database("oms_service").Collection(collectionName)
 
 }

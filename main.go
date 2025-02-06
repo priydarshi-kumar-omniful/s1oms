@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
+
+
 	"oms/routes"
 	"oms/constants" //project level constants
 	"oms/database"
-	"github.com/omniful/go_commons/http"
 	"oms/utils"
-
+	"oms/controllers"
+	
+	"github.com/omniful/go_commons/http"
 )
 
 func main(){
@@ -15,10 +18,10 @@ func main(){
 	server := http.InitializeServer(constants.PORT, constants.ReadTimeout, constants.WriteTimeout, constants.IdleTimeout)
 	
 	database.Connect()
-
+	controllers.MongoClient = database.Client
 	redisClient := utils.ConnectToRedis()
 	if redisClient == nil {
-		fmt.Println("❌ Redis connection failed. Exiting...")
+		fmt.Println("Redis connection failed. Exiting...")
 		return
 	}
 
