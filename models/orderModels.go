@@ -6,10 +6,8 @@ import "go.mongodb.org/mongo-driver/bson/primitive"
 type OrderStatus string
 
 const (
-	Pending   OrderStatus = "pending"
-	Shipped   OrderStatus = "shipped"
-	Delivered OrderStatus = "delivered"
-	Canceled  OrderStatus = "canceled"
+	OnHold   OrderStatus = "on_hold"
+	NewOrder OrderStatus = "new_order"
 )
 
 // Order represents an order in MongoDB
@@ -31,5 +29,3 @@ type OrderItem struct {
 	WarehouseID string  ` bson:"warehouse_id"` // Reference to warehouse in WMS (PostgreSQL)
 	Price       float64 ` bson:"price"`
 }
-
-

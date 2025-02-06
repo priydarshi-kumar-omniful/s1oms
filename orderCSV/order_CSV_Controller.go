@@ -90,7 +90,7 @@ func ParseAndCreateOrdersFromCSV() error {
 				CustomerID:  customerID,
 				Items:       []models.OrderItem{orderItem},
 				TotalAmount: float64(quantity) * price, // Calculate total for this item
-				Status:      models.Pending,
+				Status:      models.OnHold,
 			}
 
 			// Insert the order into MongoDB

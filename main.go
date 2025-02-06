@@ -3,23 +3,23 @@ package main
 import (
 	"fmt"
 
-
-	"oms/routes"
 	"oms/constants" //project level constants
-	"oms/database"
-	"oms/utils"
 	"oms/controllers"
-	
+	"oms/database"
+	"oms/routes"
+	"oms/utils"
+
 	"github.com/omniful/go_commons/http"
 )
 
-func main(){
+func main() {
 	// Initialize the server
 	server := http.InitializeServer(constants.PORT, constants.ReadTimeout, constants.WriteTimeout, constants.IdleTimeout)
-	
+
 	database.Connect()
 	controllers.MongoClient = database.Client
 	redisClient := utils.ConnectToRedis()
+	utils.SQSInitialization()
 	if redisClient == nil {
 		fmt.Println("Redis connection failed. Exiting...")
 		return
@@ -30,7 +30,7 @@ func main(){
 		fmt.Println("Failed to initialize server")
 		return
 	}
-	
+
 	routes.IncomingRoutes(server)
 
 	// Start the server
@@ -40,14 +40,3 @@ func main(){
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
