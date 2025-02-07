@@ -8,7 +8,7 @@ import (
 	"oms/database"
 	"oms/routes"
 	"oms/config"
-
+	"oms/consumer"
 	"github.com/omniful/go_commons/http"
 )
 
@@ -19,7 +19,10 @@ func main() {
 	database.Connect()
 	controllers.MongoClient = database.Client
 	redisClient := config.ConnectToRedis()
+
 	config.SQSInitialization()
+	go consumer.StartConsumer()
+
 	if redisClient == nil {
 		fmt.Println("Redis connection failed. Exiting...")
 		return

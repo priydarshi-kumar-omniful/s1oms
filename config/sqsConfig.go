@@ -13,17 +13,19 @@ import (
 var (
 	SQSQueue     *sqs.Queue
 	SQSPublisher *sqs.Publisher // Store Publisher instance
+	QueueURL     string
+	Region       string
 )
 
 func SQSInitialization() {
-	region := os.Getenv("AWS_REGION")
-	if region == "" {
+	Region = os.Getenv("AWS_REGION")
+	if Region == "" {
 		log.Fatalf("Missing AWS region environment variable")
 	}
 
 	config := &sqs.Config{
 		Account:     "062260873674",
-		Region:      region,
+		Region:      Region,
 		Compression: compression.None,
 	}
 
@@ -36,6 +38,6 @@ func SQSInitialization() {
 	// Store queue and publisher
 	SQSQueue = queue
 	SQSPublisher = sqs.NewPublisher(queue) // ✅ Initialize publisher
-
+	QueueURL = *queue.Url
 	fmt.Printf("Successfully connected to FIFO Queue: %s\nQueue URL: %s\n", queue.Name, *queue.Url)
 }

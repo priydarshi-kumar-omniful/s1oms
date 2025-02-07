@@ -1,4 +1,4 @@
-package csv_order
+package orderCSV
 
 import (
 	"context"
@@ -17,9 +17,9 @@ import (
 var MongoClient *mongo.Client
 
 // ParseAndCreateOrdersFromCSV processes the CSV file and creates orders in MongoDB
-func ParseAndCreateOrdersFromCSV() error {
+func ParseAndCreateOrdersFromCSV(filePath string) error {
 	// Step 1: Open the CSV file
-	file, err := os.Open("./orderCSV/order.csv")
+	file, err := os.Open(filePath)
 	if err != nil {
 		return fmt.Errorf("error opening CSV file: %w", err)
 	}
@@ -29,7 +29,7 @@ func ParseAndCreateOrdersFromCSV() error {
 	csvReader, err := csv.NewCommonCSV(
 		csv.WithBatchSize(1), // Process one record at a time (you can adjust batch size)
 		csv.WithSource(csv.Local),
-		csv.WithLocalFileInfo("./orderCSV/order.csv"),
+		csv.WithLocalFileInfo(filePath),
 	)
 	if err != nil {
 		return fmt.Errorf("error initializing CSV reader: %w", err)

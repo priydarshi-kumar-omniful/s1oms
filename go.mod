@@ -5,7 +5,9 @@ go 1.22.6
 require (
 	github.com/aws/aws-sdk-go-v2 v1.36.1
 	github.com/aws/aws-sdk-go-v2/config v1.29.6
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.37.14
 	github.com/gin-gonic/gin v1.10.0
+	github.com/google/uuid v1.3.0
 	github.com/omniful/go_commons v0.4.66
 	go.mongodb.org/mongo-driver v1.17.2
 )
@@ -43,7 +45,6 @@ require (
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
-	github.com/google/uuid v1.3.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.4 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
