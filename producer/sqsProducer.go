@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"log"
 
-	"oms/config"
+	"oms/configs"
 
 	"github.com/google/uuid"
 	"github.com/omniful/go_commons/sqs"
 )
 
 func PublishOrderMessage(orderFilePath string) error {
-	if config.SQSPublisher == nil {
+	if configs.SQSPublisher == nil {
 		return fmt.Errorf("SQS publisher is not initialized")
 	}
 
@@ -22,7 +22,7 @@ func PublishOrderMessage(orderFilePath string) error {
 		DeduplicationId: uuid.New().String(), // Unique ID for FIFO queue
 	}
 
-	err := config.SQSPublisher.Publish(context.Background(), message)
+	err := configs.SQSPublisher.Publish(context.Background(), message)
 	if err != nil {
 		log.Printf("Failed to publish order message: %v", err)
 		return err

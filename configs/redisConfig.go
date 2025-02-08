@@ -1,4 +1,4 @@
-package config
+package configs
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 )
 
 // ConnectToRedis establishes a Redis client connection
-func ConnectToRedis() *redis.Client {
+func ConnectToRedis(ctx context.Context) *redis.Client {
 	// Define Redis config (adjust as needed)
 	redisConfig := &redis.Config{
 		ClusterMode: false,

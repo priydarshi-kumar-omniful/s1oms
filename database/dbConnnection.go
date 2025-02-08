@@ -18,9 +18,8 @@ import (
 var Client *mongo.Client
 var Ctx context.Context
 
-func Connect() {
-	// Set a timeout for the connection attempt
-	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Second)
+func Connect(ctx context.Context) {
+	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
 	clientOptions := options.Client().ApplyURI(constants.MongoDBURI)
@@ -46,6 +45,6 @@ func GetCollection(collectionName string) *mongo.Collection {
 	defer cancel()
 	fmt.Println("get collection called")
 	// Return the MongoDB collection with the context
-	return Client.Database("oms_service").Collection(collectionName)
+	return Client.Database("oms_Service").Collection(collectionName)
 
 }

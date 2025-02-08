@@ -2,31 +2,35 @@ package main
 
 import (
 	"fmt"
-
+	"oms/appinit"
 	"oms/constants" //project level constants
-	"oms/controllers"
-	"oms/database"
 	"oms/routes"
-	"oms/config"
-	"oms/consumer"
+	
 	"github.com/omniful/go_commons/http"
+	"github.com/omniful/go_commons/config"
+	"log"
+	"time"
 )
 
 func main() {
-	// Initialize the server
+
+	// Initialize config
+	err := config.Init(time.Second * 10)
+	if err != nil {
+		log.Panicf("Error while initialising config, err: %v", err)
+		panic(err)
+	}
+
+	ctx, err := config.TODOContext()
+	if err != nil {
+		log.Panicf("Error while getting context from config, err: %v", err)
+		panic(err)
+	}
+
+	appinit.Initialize(ctx)
+
 	server := http.InitializeServer(constants.PORT, constants.ReadTimeout, constants.WriteTimeout, constants.IdleTimeout)
 
-	database.Connect()
-	controllers.MongoClient = database.Client
-	redisClient := config.ConnectToRedis()
-
-	config.SQSInitialization()
-	go consumer.StartConsumer()
-
-	if redisClient == nil {
-		fmt.Println("Redis connection failed. Exiting...")
-		return
-	}
 
 	//checking the error
 	if server == nil {
@@ -37,8 +41,7 @@ func main() {
 	routes.IncomingRoutes(server)
 
 	// Start the server
-	err := server.StartServer("oms")
-	if err != nil {
+	if err :=server.StartServer("oms");err!= nil {
 		fmt.Println("Server error:", err)
 	}
 

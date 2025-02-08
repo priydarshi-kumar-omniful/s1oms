@@ -1,4 +1,4 @@
-package config
+package configs
 
 import (
 	"context"
@@ -31,6 +31,7 @@ func SQSInitialization() {
 
 	queueName := "MyOrders.fifo"
 	queue, err := sqs.NewFifoQueue(context.Background(), queueName, config)
+	
 	if err != nil {
 		log.Fatalf("Error connecting to FIFO queue: %v", err)
 	}

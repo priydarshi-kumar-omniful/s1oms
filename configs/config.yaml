@@ -1,0 +1,23 @@
+server:
+  port: ":8080"
+  read_timeout: 0
+  write_timeout: 0
+  idle_timeout: 0
+
+database:
+  mongodb_uri: "mongodb://localhost:27017"
+
+cache:
+  redis_port: "localhost:6379"
+
+
+aws:
+  region: "us-east-1"   
+  account_id: "062260873674"
+  sqs:
+    queue_name: "MyOrders.fifo"
+    compression: "none" 
+
+app:
+  log_level: "info" 
+  environment: "development"
