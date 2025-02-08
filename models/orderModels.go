@@ -28,3 +28,14 @@ type OrderItem struct {
 	WarehouseID string  `bson:"warehouse_id" json:"warehouse_id" csv:"warehouse_id"` // Reference to warehouse in WMS (PostgreSQL)
 	Price       float64 `bson:"price" json:"price" csv:"price"`
 }
+
+
+
+type KafkaResponseOrderMessage struct {
+	OrderItemsID    string `json:"order_items_id"`
+	OrderID         string `json:"OrderID"`
+	SKUID           string `json:"sku_id"`
+	QuantityOrdered int    `json:"quantity_ordered"`
+	HubID           string `json:"hub_id"`
+	SellerID        string `json:"seller_id"`
+}
